@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title></title>
+    <!-- Our Website CSS Styles -->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <body>
+  <!--   <button id="button1">play</button>
+<button id="button2">pause</button> -->
+     <button id="button1">play</button>
+      <button id="button2">fly</button>
+       <button id="button3">pause</button>
+       <button id="button4">add</button>
+    <!-- <div id="bird">
+    </div> -->
+
+<div class="bird">
+    </div>
+       
+ <script src="js/script1.js"></script>
+
+    </body>
+
+</html>
+
+
+
+
+script1:
+
+$(document).ready(function() {
+    document.getElementById('bird').style.backgroundImage = "url('images/bird.png')";
+    var x = -183;
+    var total_width = 918;
+
+    var frames = 14;
+    var y = 0;
+    var counter = 0;
+
+    function bird1()
+
+    {
+        counter = counter + 1;
+        document.getElementById('bird').style.backgroundPosition = x + 'px' + ' ' + y + 'px';
+        x = x - 183;
+
+        if (Math.abs(x) > total_width) {
+            x = 0;
+            y = y - 170;
+            document.getElementById('bird').style.backgroundPosition = x + 'px' + ' ' + y + 'px';
+
+
+        } else if (counter > frames) {
+            x = 0;
+            y = 0;
+            counter = 0;
+
+        }
+
+    }
+    setInterval(bird1, 100);
+
+    var intervalId = null;
+    var pos = 0;
+  
+    document.getElementById("button1").onclick = function() {
+        var ab = document.getElementById('bird');
+
+        function frame() {
+            if (pos == 1078) {
+                pos = 0;
+            }
+            pos++;
+            ab.style.left = pos + 'px';
+        }
+
+        intervalId = setInterval(frame, 10);
+
+
+    }
+
+    document.getElementById("button2").onclick = function() {
+
+        clearInterval(intervalId);
+
+
+    }
+
+});
+
+SCript2:
+
+$(document).ready(function() {
+
+
+    var x = -183;
+    var total_width = 918;
+
+    var frames = 14;
+    var y = 0;
+    var counter = 0;
+    var position = 170;
+    var count = 0;
+    var intervalId = null;
+
+    function Bird()
+
+    {
+        var self;
+        var pos = 0;
+
+        this.creatediv = function() {
+            var iDiv = document.createElement('div');
+            iDiv.className = 'bird';
+
+            iDiv.style.backgroundImage = "url('images/bird.png')";
+            iDiv.style.top = (count += 170) + 'px';
+
+            document.getElementsByTagName('body')[0].appendChild(iDiv);
+            self = iDiv;
+        };
+
+
+
+        var box = document.getElementsByClassName("bird");
+        this.play = function() {
+            self.style.backgroundPosition = x + 'px' + ' ' + y + 'px';
+
+            counter = counter + 1;
+
+            x = x - 183;
+
+            if (Math.abs(x) > total_width) {
+                x = 0;
+                y = y - 170;
+                self.style.backgroundPosition = x + 'px' + ' ' + y + 'px';
+
+
+
+            } else if (counter > frames) {
+                x = 0;
+                y = 0;
+                counter = 0;
+
+            }
+
+        };
+
+        this.animate = function() {
+
+            this.play1 = setInterval(this.play, 100);
+        };
+
+        // var intervalId=null;
+        var pos = 0;
+        this.fly = function() {
+                this.frame = function() {
+                if (pos == 1078) {
+                    pos = 0;
+                }
+                pos++;
+                self.style.left = pos + 'px';
+            }
+
+            intervalId = setInterval(this.frame, 10);
+
+
+        };
+
+        this.pause = function()
+
+        {
+        	// alert("clicked");
+        	// console.log(this.intervalId);
+            clearInterval(intervalId);
+	    }
+
+
+    };
+
+    window.bird = [];
+    document.getElementById("button4").onclick = function() {
+        var obj = new Bird();
+        obj.creatediv();
+        bird.push(obj);
+    }
+    document.getElementById('button1').onclick = function() {
+
+        bird[0].animate();
+       
+    }
+    document.getElementById('button2').onclick = function() {
+        bird[0].fly();
+    }
+    document.getElementById('button3').onclick = function() {
+            bird[0].pause();
+        }
+        
+});

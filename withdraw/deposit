@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title></title>
+    <!-- Our Website CSS Styles -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <body>
+
+        <!--  <input type="submit" name="deposit" value="deposit" id="depositCash"><br>
+     -->
+        <!-- <input type="submit" name="withdrawal" value="withdrawal" id="withdrawCash"> -->
+        <input type="text" id="deposit1" placeholder="enter" />
+        <button onclick="myFunction()">deposit</button>
+
+        <input type="text" id="deposit2" placeholder="enter" />
+        <button onclick="myFunctionfunction()">withdraw</button>
+        <button onclick="print()">print</button>
+        <table id="minStatement">
+
+
+        </table>
+ <script src="js/script2.js"></script>
+
+    </body>
+
+</html>
+
+
+
+SCRIP1:
+
+
+/*var defaultBalance=1000;
+var customer1 = {
+	custName:"Rock",
+	transactionStatements:[{date:new Date(),balance:defaultBalance,money:0}]
+
+ };
+ var customer2 = {
+	custName:"Rock",
+	transactionStatements:[{date:new Date(),balance:defaultBalance,money:0}]
+
+ };*/
+
+var defaultBalance = 1000;
+
+function Customer(name, id) {
+    var name = name;
+    this.id = id;
+    var transactionStatements = [{
+        date: new Date(),
+        balance: defaultBalance,
+        money: 0
+    }];
+    name = function() {
+
+
+        return name;
+    }
+    name = function(Customername) {
+        name.push(Customername);
+    }
+
+    gettransactionStatements = function() {
+        return transactionStatements;
+    }
+    settransactionStatements = function(tr) {
+        transactionStatements.push(tr);
+    }
+}
+
+var customer1 = new Customer("john", 5222);
+var customer2 = new Customer("sam", 0002);
+
+// Customer.prototype.deposit = function(depositAmount) {
+// 	this.name=name;
+// 		console.log(this.id);
+
+// };
+
+
+Customer.prototype.depositAmount = function(deposit) {
+    var val = parseInt(document.getElementById("deposit1").value);
+    var amount = gettransactionStatements()[gettransactionStatements().length - 1]
+        .balance + parseInt(deposit);
+    settransactionStatements({
+        date: new Date(),
+        balance: amount,
+        money: val
+    });
+    console.log(amount);
+return this;
+}
+
+Customer.prototype.withdrawAmount = function(withdraw) {
+
+    if (gettransactionStatements()[gettransactionStatements().length - 1].balance < withdraw) {
+        alert("sorry your request cannot be proceeded.Low balance!");
+    } else {
+        var val = parseInt(document.getElementById("deposit2").value);
+        var amount = gettransactionStatements()[gettransactionStatements().length - 1]
+            .balance - parseInt(withdraw);
+        settransactionStatements({
+            date: new Date(),
+            balance: amount,
+            money: val
+        });
+        console.log(amount);
+return this;
+    }
+}
+ // transactionStatements.deposit().withdrawal();
+
+function myFunction() {
+
+    var deposit = document.getElementById("deposit1").value;
+    customer1.depositAmount(deposit);
+
+}
+
+function myFunctionfunction() {
+
+    var withdraw = document.getElementById("deposit2").value;
+    customer1.withdrawAmount(withdraw);
+
+}
+
+function print() {
+
+    customer1.print1();
+}
+
+Customer.prototype.print1 = function() {
+
+
+    var table = document.getElementById("minStatement");
+    table.innerHTML = "";
+    console.log(table)
+    if (gettransactionStatements().length >= 5) {
+        // alert("more than 5 transactions cant be printed");
+
+        // var table=document.getElementById("minStatement").innerHTML="";
+        var count = 0;
+        for (i = gettransactionStatements().length - 1; i >= gettransactionStatements().length - 5; i--) {
+
+
+            var row = table.insertRow(table.rows.length);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = gettransactionStatements()[i].date;
+            cell2.innerHTML = gettransactionStatements()[i].balance;
+            cell3.innerHTML = gettransactionStatements()[i].money;
+
+            count++;
+            // if(count==5)
+            // {
+            // 	break;
+            // }
+            deposit1.value = "";
+            deposit2.value = "";
+
+        }
+
+    } else {
+        for (i = gettransactionStatements().length - 1; i >= 0; i--) {
+
+
+            var row = table.insertRow(table.rows.length);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = gettransactionStatements()[i].date;
+            cell2.innerHTML = gettransactionStatements()[i].balance;
+            cell3.innerHTML = gettransactionStatements()[i].money;
+
+            count++;
+           
+        }
+
+    }
+
+}
+
+
+
+SCRIPT2:
+
+
+var defaultBalance = 1000;
+
+function Customer(name, id) {
+    var name = name;
+    var id = id;
+    var transactionStatements = [{
+        date: new Date(),
+        balance: defaultBalance,
+        money: 0
+    }];
+   
+
+    gettransactionStatements = function() {
+        return transactionStatements;
+    }
+    settransactionStatements = function(tr) {
+        transactionStatements.push(tr);
+    }
+var depositAmount=function(deposit) {
+    var val = parseInt(document.getElementById("deposit1").value);
+    var amount = gettransactionStatements()[gettransactionStatements().length - 1]
+        .balance + parseInt(deposit);
+    settransactionStatements({
+        date: new Date(),
+        balance: amount,
+        money: val
+    });
+    console.log(amount);
+return this;
+}
+var withdrawAmount =function(withdraw) {
+
+    if (gettransactionStatements()[gettransactionStatements().length - 1].balance < withdraw) {
+        alert("sorry your request cannot be proceeded.Low balance!");
+    } else {
+        var val = parseInt(document.getElementById("deposit2").value);
+        var amount = gettransactionStatements()[gettransactionStatements().length - 1]
+            .balance - parseInt(withdraw);
+        this.settransactionStatements({
+            date: new Date(),
+            balance: amount,
+            money: val
+        });
+        console.log(amount);
+return this;
+    }
+}
+var print1=function() {
+
+
+    var table = document.getElementById("minStatement");
+    table.innerHTML = "";
+    console.log(table)
+    if (gettransactionStatements().length >= 5) {
+        // alert("more than 5 transactions cant be printed");
+
+        // var table=document.getElementById("minStatement").innerHTML="";
+        var count = 0;
+        for (i = gettransactionStatements().length - 1; i >=gettransactionStatements().length - 5; i--) {
+
+
+            var row = table.insertRow(table.rows.length);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = gettransactionStatements()[i].date;
+            cell2.innerHTML = gettransactionStatements()[i].balance;
+            cell3.innerHTML = gettransactionStatements()[i].money;
+
+            count++;
+            // if(count==5)
+            // {
+            //  break;
+            // }
+            deposit1.value = "";
+            deposit2.value = "";
+
+        }
+
+    } else {
+        for (i =gettransactionStatements().length - 1; i >= 0; i--) {
+
+
+            var row = table.insertRow(table.rows.length);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = gettransactionStatements()[i].date;
+            cell2.innerHTML = gettransactionStatements()[i].balance;
+            cell3.innerHTML = gettransactionStatements()[i].money;
+
+            count++;
+           
+        }
+
+    }
+
+}
+return{
+
+
+    dep:depositAmount,
+    withdr:withdrawAmount,
+    print12:print1
+}
+}
+
+var customer1 = new Customer("john", 5222);
+var customer2 = new Customer("sam", 0002);
+
+// Customer.prototype.deposit = function(depositAmount) {
+// 	this.name=name;
+// 		console.log(this.id);
+
+// };
+
+
+
+
+
+ // transactionStatements.deposit().withdrawal();
+
+function myFunction() {
+
+    var deposit = document.getElementById("deposit1").value;
+    customer1.dep(deposit);
+
+}
+
+function myFunctionfunction() {
+
+    var withdraw = document.getElementById("deposit2").value;
+    customer1.withdra(withdraw);
+
+}
+
+function print() {
+
+    customer1.print12();
+}
+
+
+
+

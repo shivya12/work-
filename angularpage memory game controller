@@ -1,0 +1,190 @@
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+ 	var count = 0;	
+         var img1,firstImg=0,secondImg=0;
+		// 	$scope.constants = {
+		// 	backimg_array:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+		// 	backimg : 'images/card-back.png'
+		// };
+		$scope.cards = [
+		{
+			flipped: false,
+			img:'images/8-ball.png',
+		},
+		{
+			flipped: false,
+			img:'images/8-ball.png',
+		},
+		{
+			flipped: false,
+			img:'images/baked-potato.png',
+		},
+		{
+			flipped: false,
+			img:'images/baked-potato.png',
+		},
+		{
+			flipped: false,
+			img:'images/dinosaur.png',
+		},
+		{
+			flipped: false,
+			img:'images/dinosaur.png',
+		},
+		{
+			flipped: false,
+			img:'images/kronos.png',
+		},
+		{
+			flipped: false,
+			img:'images/kronos.png',
+		},
+		{
+			flipped: false,
+			img:'images/rocket.png',
+		},
+		{
+			flipped: false,
+			img:'images/rocket.png',
+		},
+		{
+			flipped: false,
+			img:'images/skinny-unicorn.png',
+		},
+		{
+			flipped: false,
+			img:'images/skinny-unicorn.png',
+		},
+		{
+			flipped: false,
+			img:'images/that-guy.png',
+		},
+		{
+			flipped: false,
+			img:'images/that-guy.png',
+		},
+		{
+			flipped: false,
+			img:'images/zeppelin.png',
+		},
+		{
+			flipped: false,
+			img:'images/zeppelin.png',
+		}
+	];
+
+		 var shuffle = function(o){ 
+        for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+        };
+ 
+       $scope.cards = shuffle($scope.cards);
+       console.log($scope.cards);
+
+       
+         var flag=0;
+         $scope.IsVisible = false;
+         
+         // $scope.flip =function(item){
+         // 	this.flipped = !this.flipped;
+         // }
+         var checkFliped  = function(item,index){
+        			
+        			if(count ==1) {
+        				img1 = item.img;
+        				firstImg = index;
+        				console.log(firstImg)
+        				return true;
+        			}
+        			if(count ==2){
+        				count =0;
+
+        				secondImg =index;
+        				console.log(secondImg)
+
+        				if(img1 === item.img)
+        					return true;
+        				else{
+        					console.log("not matched");
+							$scope.cards[firstImg].flipped =false;
+							$scope.cards[secondImg].flipped =false;
+        					
+
+        					return false;
+        				}
+        				console.log(firstImg);
+        					console.log(secondImg);
+        			}
+        			
+        		};	
+        $scope.myFunc = function(index, item) {
+        	    //console.log(event.currentTarget);
+        	    item.flipped = true;
+        		// $("#backImg"+index).hide();
+        		// $("#cardImg"+index).show();
+        		
+        		count++;
+        	 // $scope.flip(item);
+        	 	var x = checkFliped(item,index);
+    			
+  			 };
+
+
+
+});
+
+
+
+INDEX
+
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> Memory Game </title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="myApp/controller/controller.js"></script>
+  
+ </head>
+
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl"> 
+      <div class="col-sm-3 no-space" ng-repeat="item in cards" ng-click="myFunc($index,item)">
+     
+       <div><img src='images/card-back.png' class="backImg{{$index}}" ng-hide="item.flipped" ></div>
+       <div><img ng-src={{item.img}} class="cardImg{{$index}}" ng-show="item.flipped"></div>
+       <!-- <div>{{item.img}}</div> -->
+      </div>
+    
+</div>
+
+</body>
+</html>
+
+
+CSS
+
+ .no-space .back
+ {
+ -webkit-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
+    -o-transform: rotateY( 180deg );
+    transform: rotateY( 180deg );
+}
+.no-space .flipped {
+      -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+}
+.cardHide
+{
+	display:none;
+}

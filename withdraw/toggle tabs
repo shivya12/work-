@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> tab</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+   
+</head>
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="script/app.js"></script> -->
+<body>
+<p>Click on the button to load  file:</p>
+		
+      <div id = "stage" style = "background-color:#cc0;">
+         STAGE
+      </div>
+ <input type = "button" id = "driver" value = "Load Data" />
+
+
+
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="script/app.js"></script>
+	</body>
+	</html>
+  
+  
+  HTML2:
+  
+  <!DOCTYPE html>
+<html>
+
+<head>
+    <title> tab</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+   
+</head>
+
+
+
+<body>
+
+
+
+
+<ul class="tab">
+  <li ><a href="#tab1" class="tablinks">tab1</a></li>
+  <li><a href="#tab2" class="tablinks">tab2</a></li>
+  <li><a href="#tab3" class="tablinks">tab3</a></li>
+</ul>
+
+<div id="tab1" class="tabcontent active">
+ 
+  <p>This is tab1</p>
+</div>
+
+<div id="tab2" class="tabcontent">
+
+  <p>This is tab2</p> 
+</div>
+
+<div id="tab3" class="tabcontent">
+  
+  <p>This is tab3</p>
+</div>
+
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="script/app1.js"></script>
+	</body>
+	</html>
+  
+  HTML3"
+  
+  <!DOCTYPE html>
+<html>
+
+<head>
+    <title> tab</title>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,User-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+
+
+<body>
+
+
+    <!--  temps -->
+     <button type="button" id="goButton"> Dynamic</button>
+    <div id="hideShowContainer">
+        
+       <!--  <button type="button" id="goButton"> GO!</button> -->
+     
+       <div id="tabs_2">
+            <ul class="tab">
+                <li><a href="#tab1" class="tablinks">tab1</a>
+                </li>
+                <li><a href="#tab2" class="tablinks">tab2</a>
+                </li>
+                <li><a href="#tab3" class="tablinks">tab3</a>
+                </li>
+            </ul>
+
+            <div id="tab1" class="staticTabcontent active">
+
+                <p>This is tab1</p>
+            </div>
+
+            <div id="tab2" class="staticTabcontent">
+
+                <p>This is tab2</p>
+            </div>
+
+            <div id="tab3" class="staticTabcontent">
+
+                <p>This is tab3</p>
+            </div>
+       </div>
+     </div>
+
+    
+    <div id="tabs_1"  class="hidden">
+        <!-- temps1 -->
+    </div>
+
+
+    <!-- <div id="tabs_1">
+  temps1
+</div> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
+    <script src="script/app2.js"></script>
+</body>
+
+</html>
+
+
+
+APP1:
+$(document).ready(function() {
+            $("#driver").click(function(event){
+			
+	alert("hi");
+               $.getJSON('../tabs/data.json', function(jd,e) {
+               	alert("hi");
+               	console.log(data,e);
+                  $('#stage').html('<p> Name: ' + jd.name + '</p>');
+                  $('#stage').append('<p>Age : ' + jd.age+ '</p>');
+                  $('#stage').append('<p> Sex: ' + jd.sex+ '</p>');
+               });
+            });
+				
+         });
+         
+         APP2:
+         
+
+$(document).ready(function()
+{
+	
+    $('.tablinks').click(function(event)
+     {
+    	  var a = $(this).attr("href");
+    $('.tabcontent').hide();
+    $(a).show();
+    
+  });
+});
+
+APP3:
+
+$(document).ready(function() {
+
+    $.ajax({
+        url: 'data.json',
+        success: function(data) {
+            var data1 = JSON.parse(data);
+        
+            add("tabs_1", data1);
+        }
+    })
+
+    
+  //   $('.tablinks').click(function(event)
+  //    {
+  //         var a = $(this).attr("href");
+  //   $('.tabcontent').hide();
+  //   $(a).show();
+    
+  // });
+
+
+
+    function add(id,data) {
+
+        console.log(data.jsonTab);
+
+       // debugger;
+        $(document).on('click', '.title', function() {
+            var e1 = $(this).data("content");
+          
+            $('.contents').hide();
+            $('.' + e1).show();
+        });
+
+        
+        var ulist = $('<ul class="tabList">');
+        var a = $('<div class="tabcontent">');
+        $.each(data.jsonTab, function(v,element) {
+
+            var attrObj = {
+                "class": "title",
+                "data-content": "content" + v
+            };
+
+          
+            var attrObj1 = {
+               
+               "class":"contents content"+v,
+                "id": element.id
+            };
+
+
+          
+            ulist.append($("<li>").attr(attrObj).html(data.jsonTab[v].header));
+            a.append($("<div>").attr(attrObj1).html(data.jsonTab[v].content));
+            $('#' + id).append(ulist).append(a);
+        });
+             
+
+            $('.contents').hide();
+
+            $('#'+data.defaultTab).show();
+            
+
+            // for first child by default
+
+
+            // var e2 = $(ulist).find('li:first-child').data('content');
+            // $('.' + e2).show();
+
+        // for first child by default ends
+    }
+    
+   
+     $('.tablinks').click(function(event)
+     {
+          var a = $(this).attr("href");
+    $('.staticTabcontent').hide();
+    $(a).show();
+    
+  });
+      $("#goButton").click(function() {
+        $('#hideShowContainer').toggle()
+        $('#tabs_1').toggle();
+
+        var _text = $(this).text() == 'Dynamic' ? 'Static' : 'Dynamic';
+        $(this).text(_text);
+
+        });
+      
+
+
+});
+
+APP4:
+$(document).ready(function() {
+
+    $.ajax({
+        url: 'data.json',
+        success: function(data) {
+            var data1= JSON.parse(data);
+            add(data1);
+        }
+    })
+
+    function add(data) {
+
+        console.log(data.jsonTab);
+
+    document.addEventListener("click", '.title', function() {
+            var e1 = this.data('content');
+            // $(this).addClass('active'); 
+           this.document.getElementById(content).style.visibility = "hidden";
+           this.document.getElementById(content).style.visibility = "visible";
+        });
+        var ulist = $('<ul>');
+        var a = $('<div class="tabcontent">');
+        $.each(data.jsonTab, function(v) {
+
+            var attrObj = {
+                "class": "title",
+                "data-content": "content" + v
+            };
+            var attrObj1 = {
+                "id": "contents content" + v
+            };
+            ulist.append($("<li>").attr(attrObj).html(data.jsonTab[v].header));
+            a.append($("<div>").attr(attrObj1).html(data.jsonTab[v].content));
+            $('#tabs').append(ulist).append(a);
+        });
+        var e2 = $(ulist).find('li:first-child').data('content');
+        $('.' + e2).show();
+    }
+});
+
+
+STYLE
+
+
+#tabs_1{
+    margin:0 auto;
+    width:100%;
+}
+ul
+{
+list-style-type: none;
+color: #EE82EE;/*font-size:20px;*/
+
+}
+ul li
+{
+    border:1px solid #A9A9A9;
+
+
+
+}
+.title {
+ padding-left: 7px;
+    padding-right: 3px;
+    width: 12%;
+    margin: 6px 0 0 0
+    }
+
+.tabcontent
+{
+    font-size: 7px;
+    position: absolute;
+    left: 109px;
+ /*   bottom: -19pxx;*/
+    top: 18px;
+    color:#FF00FF;
+}
+/*.tabcontent ul li
+{
+    color:#FF00FF;
+}*/
+ul.tab
+{
+    
+}
+ul.tab li
+{
+    font-size:23px;
+    width:7%;
+    display:inline-block;
+}
+.staticTabcontent active
+{
+    display:block;
+}
+/*#tabs_1
+{
+    visibility:hidden; 
+}*/
+/*#tabs_2
+{
+    visibility:hidden; 
+}*/
+.hidden {
+  display: none;
+}
+@media screen and (min-width:1000px){
+
+
+.tabcontent
+{
+    font-size: 20px;
+    position: absolute;
+    left: 66px;
+ /*   bottom: -19pxx;*/
+    top: 86px;
+}
+
+#contents
+{
+    display:none;
+   /* margin-left:58px;*/
+    font-size:20px;
+    font-color:#000
+   
+}
+.title
+{
+   /* padding :10px;*/
+    display:inline-block;
+margin:0 0 0 10px;
+   /*padding-left: 67px;
+    font-szie: 37px;
+    padding-right: 40px;*/
+    width:7%;
+    color:#000;
+}
+ 
+ul li
+{
+    font-size:20px;
+    /*font-color:#9932CC;*/
+   border-style: solid;
+   
+             font-size: 32px;
+      
+        
+   
+  
+}
+
+.blockTab 
+{
+    display:inline-block;
+}
+}

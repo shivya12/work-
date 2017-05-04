@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Button</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+        	
+            $('#s').click(function() {
+                $(this).toggleClass("switch switch-on");
+			$('.text1').toggleClass('textColor');
+			$('.text2').toggleClass('textColor');
+
+            });
+  });
+    </script>
+</head>
+
+<body>
+    <div class="wrapper" align="center">
+
+        
+
+        <label>
+            <!-- <input type="checkbox" name="switch" class="checkbox" /> -->
+            <p class="text1 ">Show metadata</p>
+            <div class="switch" id="s">
+
+            </div>
+               <p class="text2 textColor">Show metadata</p>
+
+            
+
+            
+ 
+        </label>
+    </div>
+</body>
+
+</html>
+
+
+JQUERY
+
+
+
+$(document).ready(function(){
+	$('.switch').click(function()
+	{
+		$(this).toggleClass('switch');
+	})
+	
+});
